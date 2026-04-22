@@ -1,0 +1,1 @@
+# visao-comercial-fila-qrcode
