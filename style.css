@@ -1,0 +1,57 @@
+/* Reset básico para mobile */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: sans-serif; background-color: #f0f2f5; padding: 15px; }
+
+.queue-title { font-size: 1.2rem; margin-bottom: 20px; color: #333; }
+
+.card-item {
+    background: #fff;
+    border-radius: 12px; /* Cantos arredondados ficam melhores no mobile */
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+    border-left: 6px solid #0079bf; /* Destaque lateral */
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+}
+
+.card-info { display: flex; align-items: center; gap: 15px; }
+
+.posicao {
+    background: #e8ecef;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #0079bf;
+}
+
+.detalhes strong { display: block; font-size: 1rem; }
+.detalhes p { font-size: 0.85rem; color: #666; }
+
+/* ESTILO DO BOTÃO DE CANCELAR */
+.btn-cancelar-mobile {
+    background-color: #fff1f0; /* Vermelho bem clarinho */
+    border: 1px solid #ffa39e;
+    color: #cf1322;
+    padding: 10px 14px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column; /* Ícone em cima do texto pra poupar espaço lateral */
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+    min-width: 70px;
+}
+
+.btn-cancelar-mobile:active { /* Feedback de clique no celular */
+    background-color: #ffccc7;
+    transform: scale(0.95);
+}
+
+.icon-trash { font-size: 1.2rem; margin-bottom: 2px; }

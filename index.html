@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Where are my lines? - Fila Digital</title>
+    <style>
+        /* Variáveis de Cores (Tema Claro por padrão) */
+        :root {
+            --primary: #f3cf57;
+            --bg-body: #fffbf5;
+            --bg-card: #ffffff;
+            --text-main: #444444;
+            --text-sub: #888888;
+            --input-border: #dddddd;
+        }
+
+        /* Variáveis para Tema Escuro */
+        body.dark-mode {
+            --bg-body: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #e0e0e0;
+            --text-sub: #ffffff;
+            --input-border: #fff4f4;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 380px;
+        }
+
+        /* Botão de Alternar Tema */
+        .theme-toggle {
+            align-self: flex-end;
+            background: none;
+            border: 1px solid var(--text-sub);
+            color: var(--text-sub);
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 8px solid var(--primary);
+            transition: background 0.3s;
+        }
+
+        h2 { text-align: center; margin-top: 0; }
+
+        /* Estilos do Formulário de Cadastro */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 0.9rem; font-weight: bold; }
+        input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border-radius: 8px;
+            border: 1px solid var(--input-border);
+            background: var(--bg-card);
+            color: var(--text-main);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Estilos da Visualização da Fila */
+        .hidden { display: none; }
+        .posicao { font-size: 3.5rem; font-weight: bold; color: var(--primary); margin: 15px 0; text-align: center; }
+        .info-fila { text-align: center; color: var(--text-sub); margin-bottom: 20px; }
+
+        .btn-cancel {
+            background: none;
+            color: #ff4444;
+            border: 1px solid #ff4444;
+            padding: 10px;
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="theme-toggle" onclick="toggleTheme()">🌙 Tema Escuro</button>
+
+    <div class="container">
+        <h2 style="color: var(--primary);"> WHERE ARE MY LINES ?</h2>
+
+        <div id="tela-cadastro" class="card">
+            <p style="text-align: center; margin-bottom: 20px;"> Entre na fila para garantir seu lanche.</p>
+            <div class="form-group">
+                <label>Nome Completo</label>
+                <input type="text" id="nome" placeholder="Ex: Renan Vitinho">
+            </div>
+            <div class="form-group">
+                <label>Número do Celular</label>
+                <input type="tel" id="celular" placeholder="(00) 00000-0000">
+            </div>
+            <button class="btn-primary" onclick="entrarNaFila()">Entrar na Fila</button>
+        </div>
+
+        <div id="tela-fila" class="card hidden">
+            <div style="text-align: center; font-size: 0.8rem; color: var(--text-sub);">POSIÇÃO ATUAL</div>
+            <div class="posicao" id="num-posicao">04</div>
+            <div class="info-fila">
+                <p><strong><span id="user-nome"></span></strong>, sua vez está chegando!</p>
+                <p> Tempo estimado: <strong>12 min</strong></p>
+            </div>
+            <button class="btn-cancel" onclick="sairDaFila()">Sair da Fila / Cancelar</button>
+        </div>
+    </div>
+
+    <script>
+        // Função para alternar entre Tema Claro e Escuro
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.querySelector('.theme-toggle');
+            body.classList.toggle('dark-mode');
+            
+            if(body.classList.contains('dark-mode')) {
+                btn.innerText = "☀️ Tema Claro";
+            } else {
+                btn.innerText = "🌙 Tema Escuro";
+            }
+        }
+
+        // Simulação de entrada na fila
+        function entrarNaFila() {
+            const nome = document.getElementById('nome').value;
+            if(!nome) { alert("Por favor, digite seu nome."); return; }
+
+            document.getElementById('user-nome').innerText = nome;
+            document.getElementById('tela-cadastro').classList.add('hidden');
+            document.getElementById('tela-fila').classList.remove('hidden');
+        }
+
+        // Função para cancelar/sair
+        function sairDaFila() {
+            if(confirm("Tem certeza que deseja sair da fila? Você perderá sua posição.")) {
+                location.reload(); // Recarrega para voltar à tela inicial
+            }
+        }
+    </script>
+</body>
+</html>
